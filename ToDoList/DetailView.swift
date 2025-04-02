@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DetailView: View {
+    var passedValue: String // Don't initialise it - it will be passed from the parent view
     @Environment(\.dismiss) private var dismiss //use this line
     var body: some View {
         VStack {
@@ -15,7 +16,7 @@ struct DetailView: View {
                 .resizable()
                 .scaledToFit()
                 .foregroundStyle(.orange)
-            Text("You Are a Swifty Legend!")
+            Text("You Are a Swifty Legend!\nAnd you passed in the value \(passedValue)")
                 .font(.largeTitle)
                 .multilineTextAlignment(.center)
             
@@ -32,5 +33,5 @@ struct DetailView: View {
 }
 
 #Preview {
-    DetailView()
+    DetailView(passedValue: "Item1")
 }
