@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ToDoListView: View {
     @State private var sheetIsPresented = false
@@ -19,7 +20,7 @@ struct ToDoListView: View {
             List {
                 ForEach(toDos, id: \.self) { toDo in
                     NavigationLink {
-                        DetailView(toDo: toDo)
+//                        DetailView(toDo: toDo)
                     } label: {
                         Text(toDo)
                     }
@@ -29,10 +30,10 @@ struct ToDoListView: View {
             .navigationTitle("To Do List") //must be inside NavigationStack
             .navigationBarTitleDisplayMode(.automatic)
             .listStyle(.plain)
-//            .sheet(isPresented: $sheetIsPresented) {
-            .fullScreenCover(isPresented: $sheetIsPresented) {
+            .sheet(isPresented: $sheetIsPresented) {
+//            .fullScreenCover(isPresented: $sheetIsPresented) {
                 NavigationStack {
-                    DetailView(toDo: "")
+                    DetailView(toDo: ToDo())
                 }
             }
             .toolbar {
@@ -51,4 +52,5 @@ struct ToDoListView: View {
 
 #Preview {
     ToDoListView()
+        .modelContainer(for: ToDo.self, inMemory: true)
 }
