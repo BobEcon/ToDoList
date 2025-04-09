@@ -23,6 +23,15 @@ struct ToDoListView: View {
                         Text(toDo.item)
                     }
                     .font(.title2)
+                    .swipeActions {
+                        Button("Delete", role: .destructive) {
+                            modelContext.delete(toDo)
+                            guard let _ = try? modelContext.save() else {
+                                print("😡 ERROR: Save after .delete on ToDoListView did not work")
+                                return
+                            }
+                        }
+                    }
                 }
             }
             .navigationTitle("To Do List") //must be inside NavigationStack
