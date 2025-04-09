@@ -9,20 +9,18 @@ import SwiftUI
 import SwiftData
 
 struct ToDoListView: View {
+    @Query var toDos: [ToDo]
     @State private var sheetIsPresented = false
-    var toDos = ["Learn Swift",
-                 "Build Apps",
-                 "Change the World",
-                 "Bring the Awesome",
-                 "Take a Vacation"]
+    @Environment(\.modelContext) var modelContext
+    
     var body: some View {
         NavigationStack {
             List {
-                ForEach(toDos, id: \.self) { toDo in
+                ForEach(toDos) { toDo in
                     NavigationLink {
-//                        DetailView(toDo: toDo)
+                        DetailView(toDo: toDo)
                     } label: {
-                        Text(toDo)
+                        Text(toDo.item)
                     }
                     .font(.title2)
                 }

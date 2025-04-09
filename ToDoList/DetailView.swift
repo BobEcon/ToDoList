@@ -64,7 +64,18 @@ struct DetailView: View {
             }
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Save") {
-                    //TODO: Add Save Code Here
+                    //Move data from local vars to toDo object
+                    toDo.item = item
+                    toDo.reminderIsOn = reminderIsOn
+                    toDo.dueDate = dueDate
+                    toDo.notes = notes
+                    toDo.isCompleted = isCompleted
+                    modelContext.insert(toDo)
+                    guard let _ = try? modelContext.save() else {
+                        print("😡 ERROR: Save in DetailView did not work")
+                        return
+                    }
+                    dismiss()
                 }
             }
         }
