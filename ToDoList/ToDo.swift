@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 
+@MainActor
 @Model
 class ToDo {
     var item = ""
@@ -23,4 +24,17 @@ class ToDo {
         self.notes = notes
         self.isCompleted = isCompleted
     }
+    
+    static var preview: ModelContainer {
+        let container = try! ModelContainer(for: ToDo.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+        
+        // Add Mock Data
+        container.mainContext.insert(ToDo(item: "Create SwiftData Lessons", reminderIsOn: true, dueDate: Date.now + 60*60*24, notes: "Now with iOS16 & XCode 18", isCompleted: false))
+        container.mainContext.insert(ToDo(item: "Macedonian Educators Talk", reminderIsOn: true, dueDate: Date.now + 60*60*44, notes: "They want to learn about entrepreneurship", isCompleted: false))
+        container.mainContext.insert(ToDo(item: "Post flyes for Swift in Santiago", reminderIsOn: true, dueDate: Date.now + 60*60*72, notes: "To be hedl at UAH in Chile", isCompleted: false))
+        container.mainContext.insert(ToDo(item: "Prepare old iPhone for Lily", reminderIsOn: true, dueDate: Date.now + 60*60*12, notes: "She gets my old Pro", isCompleted: false))
+        
+        return container
+    }
+    
 }
