@@ -24,7 +24,9 @@ class ToDo {
         self.notes = notes
         self.isCompleted = isCompleted
     }
-    
+}
+
+extension ToDo {
     static var preview: ModelContainer {
         let container = try! ModelContainer(for: ToDo.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
         
@@ -36,5 +38,4 @@ class ToDo {
         
         return container
     }
-    
 }
